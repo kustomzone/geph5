@@ -3570,6 +3570,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "geph5-obfs-test"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-io 1.13.0",
+ "async-native-tls",
+ "bytes",
+ "clap",
+ "futures-lite 1.13.0",
+ "futures-util",
+ "native-tls",
+ "rand 0.8.5",
+ "rcgen",
+ "sillad",
+ "sillad-native-tls",
+ "sillad-sosistab3",
+ "smol 1.3.0",
+ "smolscale",
+ "time",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "gethostname"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"

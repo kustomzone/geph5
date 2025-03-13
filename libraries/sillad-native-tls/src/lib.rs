@@ -181,3 +181,13 @@ where
         }
     }
 }
+
+/// Helper function to convert a native_tls::TlsConnector to the async_native_tls::TlsConnector
+pub fn connector_from_native(connector: native_tls::TlsConnectorBuilder) -> TlsConnector {
+    TlsConnector::from(connector)
+}
+
+/// Helper function to convert a native_tls::TlsAcceptor to the async_native_tls::TlsAcceptor
+pub fn acceptor_from_native(acceptor: native_tls::TlsAcceptor) -> TlsAcceptor {
+    TlsAcceptor::from(acceptor)
+}
