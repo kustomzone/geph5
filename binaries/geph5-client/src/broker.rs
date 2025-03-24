@@ -1,13 +1,13 @@
 mod fronted_http;
 mod race;
 
-#[cfg(not(target_os = "ios"))]
+#[cfg(feature = "aws_lambda")]
 mod aws_lambda;
 
 use anyctx::AnyCtx;
 use anyhow::Context;
 
-#[cfg(not(target_os = "ios"))]
+#[cfg(feature = "aws_lambda")]
 use aws_lambda::AwsLambdaTransport;
 use fronted_http::FrontedHttpTransport;
 use geph5_broker_protocol::BrokerClient;
@@ -30,7 +30,7 @@ pub enum BrokerSource {
         host: String,
     },
     DirectTcp(SocketAddr),
-    #[cfg(not(target_os = "ios"))]
+    #[cfg(feature = "aws_lambda")]
     AwsLambda {
         function_name: String,
         region: String,
@@ -57,7 +57,7 @@ impl BrokerSource {
                 url: front.clone(),
                 host: Some(host.clone()),
             }),
-            #[cfg(not(target_os = "ios"))]
+            #[cfg(feature = "aws_lambda")]
             BrokerSource::AwsLambda {
                 function_name,
                 region,
