@@ -9,6 +9,7 @@ use bytes::Bytes;
 pub use client::Client;
 pub use client::{BridgeMode, BrokerKeys, Config};
 pub use control_prot::{ConnInfo, ControlClient};
+use logging::init_logging;
 use nanorpc::JrpcRequest;
 use nanorpc::RpcTransport;
 use once_cell::sync::OnceCell;
@@ -40,6 +41,8 @@ static CLIENT: OnceCell<Client> = OnceCell::new();
 pub extern "C" fn start_client(cfg: *const c_char) -> libc::c_int {
     let cfg_str = unsafe { CStr::from_ptr(cfg) }.to_str().unwrap();
     let cfg: Config = serde_json::from_str(cfg_str).unwrap();
+
+    let _ = init_logging();
 
     CLIENT.get_or_init(|| Client::start(cfg));
 
